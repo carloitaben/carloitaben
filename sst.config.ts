@@ -11,11 +11,37 @@ export default $config({
       },
     }
   },
+  console: {
+    autodeploy: {
+      target(event) {
+        if (
+          event.type === "branch" &&
+          event.branch === "main" &&
+          event.action === "pushed"
+        ) {
+          return {
+            stage: "production",
+          }
+        }
+
+        if (event.type === "pull_request") {
+          return {
+            stage: `pr-${event.number}`,
+          }
+        }
+      },
+    },
+  },
   async run() {
+    const domain =
+      $app.stage === "production"
+        ? "carlo.works"
+        : $app.stage + "staging.carlo.works"
+
     const web = new sst.aws.Astro("Web", {
       domain: {
-        name: "carlo.works",
-        redirects: ["www.carlo.works"],
+        name: domain,
+        redirects: [`www.${domain}`],
         dns: sst.cloudflare.dns(),
       },
     })
