@@ -3,15 +3,18 @@
   "type": "module",
   "packageManager": "pnpm@9.5.0",
   "scripts": {
-    "dev": "astro dev",
+    "dev": "sst dev astro dev",
+    "astro": "astro",
     "build": "astro build",
-    "start": "astro preview",
     "check": "astro check",
-    "astro": "astro"
+    "start": "astro preview",
+    "deploy": "sst deploy"
   },
   "dependencies": {
     "@astrojs/check": "^0.8.1",
-    "astro": "^4.11.5"
+    "astro": "^4.11.5",
+    "astro-sst": "2.43.3",
+    "sst": "ion"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.19",
@@ -22,9 +25,9 @@
     "typescript": "^5.5.3"
   },
   "prettier": {
-    "semi": false,
     "plugins": [
       "prettier-plugin-tailwindcss"
-    ]
+    ],
+    "semi": false
   }
 }
