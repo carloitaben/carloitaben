@@ -12,7 +12,12 @@ export default $config({
     }
   },
   async run() {
-    const web = new sst.aws.Astro("Web")
+    const web = new sst.aws.Astro("Web", {
+      domain: {
+        name: "carlo.works",
+        dns: sst.cloudflare.dns(),
+      },
+    })
 
     return {
       web,
