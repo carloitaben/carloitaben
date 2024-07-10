@@ -8,6 +8,9 @@ export default defineConfig({
   adapter: aws({
     deploymentStrategy: "static",
   }),
+  server: {
+    port: 3000,
+  },
   vite: {
     css: {
       postcss: {
