@@ -1,30 +1,159 @@
 ---
 import "~/styles/index.css"
+import Logo from "~/components/Logo.astro"
+
+const places = [
+  {
+    name: "Freelance",
+    role: "Developer",
+    year: [2023, "Ongoing"],
+    href: "https://carlo.works",
+  },
+  {
+    name: "Dallonses",
+    role: "Lead Frontend Developer",
+    year: [2023, "Ongoing"],
+    href: "https://dallonses.com",
+  },
+  {
+    name: "Not Found",
+    role: "Frontend Developer",
+    year: [2023, 2023],
+    href: "https://notfound.es",
+  },
+  {
+    name: "Dallonses",
+    role: "Frontend Developer",
+    year: [2020, 2023],
+    href: "https://dallonses.com",
+  },
+  {
+    name: "BOLD",
+    role: "Graphic Design Internship",
+    year: [2019, 2020],
+    href: "https://bold.bz",
+  },
+  // {
+  //   name: "Seeway",
+  //   role: "Graphic Design Student",
+  //   year: [2018, 2020],
+  // },
+]
+
+const awards = [
+  {
+    name: "Laus Award (Bronze)",
+    year: 2024,
+    href: "https://adg-fad.org/es/laus/proyecto/vicio-invierte-donde-invierten-los-que-invierten",
+  },
+  {
+    name: "Laus Award (Gold)",
+    year: 2023,
+    href: "https://adg-fad.org/es/laus/proyecto/vicio-0",
+  },
+  {
+    name: "Site of the Day",
+    year: 2023,
+    href: "https://awwwards.com/sites/vicio",
+  },
+]
+
+const underline = "decoration-gray-200 underline underline-offset-4"
 ---
 
-<html lang="en" class="h-full">
+<html lang="en" class="h-full text-gray-700 selection:bg-gray-200">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width" />
-    <title>CARLO(DOT)WORKS</title>
+    <title>Carlo Domínguez</title>
   </head>
-  <body class="flex items-center justify-center h-full">
-    <h1 class="sr-only">Soon™</h1>
-    <a href="mailto:hello@carlo.works">
-      <svg
-        class="w-4"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 11 11"
-        fill="none"
-        ><path
-          fill="#181E2F"
-          d="M5.432 10.514c-.784 0-1.507-.13-2.17-.392a5.256 5.256 0 0 1-1.736-1.106A5.125 5.125 0 0 1 .392 7.35 5.427 5.427 0 0 1 0 5.264c0-.765.13-1.465.392-2.1.27-.644.649-1.2 1.134-1.666A5.256 5.256 0 0 1 3.262.392 5.864 5.864 0 0 1 5.432 0c.784 0 1.507.13 2.17.392.663.261 1.237.63 1.722 1.106a4.68 4.68 0 0 1 1.134 1.666c.27.635.406 1.335.406 2.1 0 .756-.135 1.451-.406 2.086a4.85 4.85 0 0 1-1.134 1.666 5.101 5.101 0 0 1-1.722 1.106 5.864 5.864 0 0 1-2.17.392Zm0-.798c.644 0 1.237-.107 1.778-.322a4.304 4.304 0 0 0 1.414-.938c.401-.401.71-.873.924-1.414a4.605 4.605 0 0 0 .336-1.778c0-.625-.112-1.209-.336-1.75A4.128 4.128 0 0 0 8.624 2.1a4.2 4.2 0 0 0-1.414-.952 4.444 4.444 0 0 0-1.778-.35c-.644 0-1.237.117-1.778.35A4.2 4.2 0 0 0 2.24 2.1a4.304 4.304 0 0 0-.938 1.414 4.704 4.704 0 0 0-.322 1.75c0 .644.107 1.237.322 1.778.224.541.537 1.013.938 1.414.401.401.873.714 1.414.938a4.781 4.781 0 0 0 1.778.322Z"
-        ></path><path
-          fill="#181E2F"
-          d="M8.124 3.99h-1.12a1.567 1.567 0 0 0-.574-.826 1.603 1.603 0 0 0-.966-.294c-.56 0-.994.21-1.302.63-.308.42-.462 1.003-.462 1.75 0 .737.154 1.316.462 1.736.308.42.742.63 1.302.63.355 0 .667-.093.938-.28.27-.196.467-.467.588-.812h1.12c-.168.663-.49 1.157-.966 1.484-.467.317-1.013.476-1.638.476-.905 0-1.62-.285-2.142-.854-.523-.579-.784-1.372-.784-2.38 0-1.008.257-1.806.77-2.394.523-.588 1.237-.882 2.142-.882.635 0 1.195.173 1.68.518.485.336.803.835.952 1.498Z"
-        ></path></svg
-      >
-    </a>
+  <body class="min-h-full font-mono max-w-[33rem] space-y-20 px-4 py-8 md:p-10">
+    <article class="space-y-6">
+      <header>
+        <a href="mailto:hello@carlo.works">
+          <h1>CARLO(DOT)WORKS</h1>
+        </a>
+      </header>
+      <p>
+        My name is Carlo. I work as the Lead&nbsp;Frontend Developer at <a
+          href="https://dallonses.com"
+          target="_blank"
+          class:list={[underline, "hover:no-underline"]}>Dallonses</a
+        >, where I lead boutique, creative projects like the <a
+          href="https://vasava.es"
+          target="_blank"
+          class:list={[underline, "hover:no-underline"]}>Vasava website</a
+        >, and&nbsp;complex, technical ones like <a
+          href="https://www.wikiparfum.com"
+          target="_blank"
+          class:list={[underline, "hover:no-underline"]}>Wikiparfum</a
+        >.
+      </p>
+      <p>
+        Previously I worked at <a
+          href="https://notfound.es"
+          target="_blank"
+          class:list={[underline, "hover:no-underline"]}>Not Found</a
+        > building creative web experiences.
+      </p>
+      <p>
+        I see myself as designer at heart and enjoy crafting software with a
+        distinctive visual sensibility.
+      </p>
+    </article>
+    <section>
+      <header>
+        <h2>Career</h2>
+      </header>
+      <ul>
+        {
+          places.map((place) => (
+            <li>
+              <article>
+                <a
+                  href={place.href}
+                  target="_blank"
+                  class="flex justify-between group"
+                >
+                  <h3 class:list={[underline, "group-hover:no-underline"]}>
+                    {place.name}
+                  </h3>
+                  <span>{place.year.join(" — ")}</span>
+                </a>
+              </article>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+    <section>
+      <header>
+        <h2>Recognitions</h2>
+      </header>
+      <ul>
+        {
+          awards.map((award) => (
+            <li>
+              <article>
+                <a
+                  href={award.href}
+                  target="_blank"
+                  class="flex justify-between group"
+                >
+                  <h3 class:list={[underline, "group-hover:no-underline"]}>
+                    {award.name}
+                  </h3>
+                  <time>{award.year}</time>
+                </a>
+              </article>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+    <footer class="grid place-items-end">
+      <Logo />
+    </footer>
   </body>
 </html>
