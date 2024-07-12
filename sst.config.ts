@@ -38,16 +38,12 @@ export default $config({
         ? "carlo.works"
         : $app.stage + "staging.carlo.works"
 
-    const web = new sst.aws.Astro("Web", {
+    new sst.aws.Astro("Web", {
       domain: {
         name: domain,
         redirects: [`www.${domain}`],
         dns: sst.cloudflare.dns(),
       },
     })
-
-    return {
-      web,
-    }
   },
 })
