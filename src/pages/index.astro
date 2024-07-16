@@ -68,7 +68,7 @@ const underline = "decoration-gray-200 underline underline-offset-4"
     <meta name="viewport" content="width=device-width" />
     <title>Carlo Domínguez</title>
   </head>
-  <body class="min-h-full font-mono max-w-[33rem] space-y-20 px-4 py-8 md:p-10">
+  <body class="min-h-full max-w-[33rem] space-y-20 px-4 py-8 font-mono md:p-10">
     <article class="space-y-6">
       <header>
         <a href="mailto:hello@carlo.works">
@@ -114,7 +114,7 @@ const underline = "decoration-gray-200 underline underline-offset-4"
                 <a
                   href={place.href}
                   target="_blank"
-                  class="flex justify-between group"
+                  class="group flex justify-between"
                 >
                   <h3 class:list={[underline, "group-hover:no-underline"]}>
                     {place.name}
@@ -139,7 +139,7 @@ const underline = "decoration-gray-200 underline underline-offset-4"
                 <a
                   href={award.href}
                   target="_blank"
-                  class="flex justify-between group"
+                  class="group flex justify-between"
                 >
                   <h3 class:list={[underline, "group-hover:no-underline"]}>
                     {award.name}

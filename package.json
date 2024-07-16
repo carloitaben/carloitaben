@@ -6,9 +6,9 @@
     "dev": "sst dev astro dev",
     "astro": "astro",
     "build": "astro build",
-    "check": "astro check",
     "start": "astro preview",
-    "deploy": "sst deploy"
+    "deploy": "sst deploy",
+    "check": "astro check"
   },
   "dependencies": {
     "@astrojs/check": "^0.8.1",
@@ -20,14 +20,24 @@
     "autoprefixer": "^10.4.19",
     "postcss": "^8.4.39",
     "prettier": "^3.3.2",
+    "prettier-plugin-astro": "^0.14.0",
     "prettier-plugin-tailwindcss": "^0.6.5",
     "tailwindcss": "^3.4.4",
     "typescript": "^5.5.3"
   },
   "prettier": {
+    "semi": false,
     "plugins": [
+      "prettier-plugin-astro",
       "prettier-plugin-tailwindcss"
     ],
-    "semi": false
+    "overrides": [
+      {
+        "files": "*.astro",
+        "options": {
+          "parser": "astro"
+        }
+      }
+    ]
   }
 }
