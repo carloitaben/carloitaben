@@ -3,9 +3,9 @@
 import "sst"
 declare module "sst" {
   export interface Resource {
-    Web: {
-      type: "sst.aws.Astro"
-      url: string
+    "Web": {
+      "type": "sst.aws.Astro"
+      "url": string
     }
   }
 }

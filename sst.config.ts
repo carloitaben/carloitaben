@@ -38,12 +38,49 @@ export default $config({
         ? "carlo.works"
         : $app.stage + "staging.carlo.works"
 
-    new sst.aws.Astro("Web", {
+    const web = new sst.aws.Astro("Web", {
+      dev: {
+        command: "pnpm dev",
+        url: "http://localhost:3000",
+        autostart: true,
+      },
       domain: {
         name: domain,
         redirects: [`www.${domain}`],
         dns: sst.cloudflare.dns(),
       },
     })
+
+    if ($app.stage === "production") {
+      new cloudflare.EmailRoutingRule("EmailRouting", {
+        name: "Redirect to personal Gmail account",
+        zoneId: cloudflare.getZoneOutput({
+          name: web.url,
+        }).zoneId,
+        enabled: true,
+        matchers: [
+          {
+            type: "literal",
+            field: "to",
+            value: "hello@carlo.works",
+          },
+          {
+            type: "literal",
+            field: "to",
+            value: "hola@carlo.works",
+          },
+        ],
+        actions: [
+          {
+            type: "forward",
+            values: ["hola.carlodominguez@gmail.com"],
+          },
+        ],
+      })
+    }
+
+    return {
+      web: web.url,
+    }
   },
 })

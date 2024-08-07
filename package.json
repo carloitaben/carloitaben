@@ -3,11 +3,10 @@
   "type": "module",
   "packageManager": "pnpm@9.7.0",
   "scripts": {
-    "dev": "sst dev astro dev",
+    "dev": "astro dev",
     "astro": "astro",
     "build": "astro build",
     "start": "astro preview",
-    "deploy": "sst deploy",
     "check": "astro check"
   },
   "dependencies": {
