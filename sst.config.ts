@@ -51,34 +51,6 @@ export default $config({
       },
     })
 
-    if ($app.stage === "production") {
-      new cloudflare.EmailRoutingRule("EmailRouting", {
-        name: "Redirect to personal Gmail account",
-        zoneId: cloudflare.getZoneOutput({
-          name: web.url,
-        }).zoneId,
-        enabled: true,
-        matchers: [
-          {
-            type: "literal",
-            field: "to",
-            value: `hello@${domain}`,
-          },
-          {
-            type: "literal",
-            field: "to",
-            value: `hola@${domain}`,
-          },
-        ],
-        actions: [
-          {
-            type: "forward",
-            values: ["hola.carlodominguez@gmail.com"],
-          },
-        ],
-      })
-    }
-
     return {
       web: web.url,
     }
