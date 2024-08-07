@@ -62,12 +62,12 @@ export default $config({
           {
             type: "literal",
             field: "to",
-            value: "hello@carlo.works",
+            value: `hello@${domain}`,
           },
           {
             type: "literal",
             field: "to",
-            value: "hola@carlo.works",
+            value: `hola@${domain}`,
           },
         ],
         actions: [
