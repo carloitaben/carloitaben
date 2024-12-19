@@ -1,7 +1,7 @@
 {
   "name": "carloitaben",
   "type": "module",
-  "packageManager": "pnpm@9.7.0",
+  "packageManager": "pnpm@9.14.2",
   "scripts": {
     "dev": "astro dev",
     "astro": "astro",
@@ -13,7 +13,7 @@
     "@astrojs/check": "^0.8.1",
     "astro": "^4.11.5",
     "astro-sst": "2.43.3",
-    "sst": "ion"
+    "sst": "^3"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.19",
