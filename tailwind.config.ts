@@ -6,7 +6,15 @@ export default {
     hoverOnlyWhenSupported: true,
   },
   theme: {
-    extend: {},
+    fontFamily: {
+      mono: "IBM Plex Mono"
+    },
+    extend: {
+      spacing: {
+        "lh": "1.25rem",
+        "2lh": "2.5rem", 
+        "4lh": "5rem", 
+      }
+    }
   },
-  plugins: [],
 } satisfies Config

@@ -1,0 +1,14 @@
+---
+type Props = {
+  header: string
+  children: any
+}
+
+---
+
+<section>
+  <header>
+    <h3>{Astro.props.header}</h3>
+  </header>
+  <slot />
+</section>

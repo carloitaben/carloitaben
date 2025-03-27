@@ -1,3 +1,37 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  @font-face {
+    font-family: "IBM Plex Mono";
+    font-display: block;
+    font-style: normal;
+    font-weight: 400;
+    src: url(../assets/fonts/ibm-plex-mono-regular.ttf) format("truetype");
+  }
+
+  html {
+    @apply font-mono bg-white text-gray-700 selection:bg-gray-200;
+  }
+
+  body {
+    @apply text-sm;
+  }
+
+  h3 {
+    @apply before:content-['––––––'] before:block uppercase;
+  }
+
+  a {
+    @apply underline decoration-gray-200 underline-offset-4 hover:no-underline group-hover:no-underline;
+  }
+
+  section {
+    @apply space-y-lh;
+  }
+
+  small {
+    @apply text-sm;
+  }
+}

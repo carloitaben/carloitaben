@@ -5,9 +5,7 @@ import autoprefixer from "autoprefixer"
 
 // https://astro.build/config
 export default defineConfig({
-  adapter: aws({
-    deploymentStrategy: "static",
-  }),
+  adapter: aws(),
   server: {
     port: 3000,
   },

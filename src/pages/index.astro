@@ -1,19 +1,20 @@
 ---
 import "~/styles/index.css"
 import Logo from "~/components/Logo.astro"
+import Section from "~/components/Section.astro"
 
 const places = [
-  {
-    name: "Freelance",
-    role: "Developer",
-    year: [2023, "Ongoing"],
-    href: "https://carlo.works",
-  },
   {
     name: "Dallonses",
     role: "Lead Frontend Developer",
     year: [2023, "Ongoing"],
     href: "https://dallonses.com",
+  },
+  {
+    name: "Freelance",
+    role: "Developer",
+    year: [2023, "Ongoing"],
+    href: "https://carlo.works",
   },
   {
     name: "Not Found",
@@ -58,54 +59,85 @@ const awards = [
   },
 ]
 
-const underline = "decoration-gray-200 underline underline-offset-4"
+const social = [
+  {
+    name: "GitHub",
+    href: "http://github.com/carloitaben",
+  },
+]
+
+const email = new URL("mailto:hello@carlo.works")
+
+email.searchParams.set("subject", "Dearest and Most Esteemed Carlo")
+email.searchParams.set("body",
+  `In the grand tapestry of our shared existence, woven with the finest ` +
+  `threads of camaraderie and mutual respect, I find myself compelled ` +
+  `to extend to you an epistolary missive. It is with the utmost reverence ` +
+  `and profound admiration for your unparalleled intellect and unwavering ` +
+  `spirit that I pen these words, hoping to illuminate the corridors ` +
+  `of your esteemed thoughts with the brilliance of my humble reflections.\n\n` +
+  `In this ever-evolving landscape of our lives, the importance of forging ` +
+  `and nurturing connections cannot be overstated. It is through dialogue ` +
+  `and shared experiences that we cultivate understanding and foster ` +
+  `the bonds that unite us. Thus, I am eager to engage in a meaningful ` +
+  `conversation with you, to explore the realms of our thoughts and ideas, ` +
+  `and to delve into the myriad topics that spark our curiosity.\n\n` +
+  `I believe that our exchanges can serve as a beacon of inspiration, ` +
+  `illuminating the paths we traverse and enriching our perspectives. ` +
+  `It is my sincerest hope that we may soon find the opportunity to connect, ` +
+  `to share our insights, and to revel in the joy of intellectual discourse.\n\n` +
+  `Yours sincerely,\n` +
+  `[YOUR NAME GOES HERE]`
+)
+
+email.search = email.search.replace(/\+/g, '%20')
 ---
 
-<html lang="en" class="h-full text-gray-700 selection:bg-gray-200">
+<html lang="en" class="h-full ">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width" />
     <title>Carlo Domínguez</title>
   </head>
-  <body class="min-h-full max-w-[33rem] space-y-20 px-4 py-8 font-mono md:p-10">
-    <article class="space-y-6">
+  <body class="min-h-full max-w-[61ch]  md:max-w-[67ch] px-4 py-8 md:p-10 space-y-2lh">
+    <article class="space-y-lh">
       <header>
-        <a href="mailto:hello@carlo.works">
+        <a href={email.href}>
           <h1>CARLO(DOT)WORKS</h1>
         </a>
       </header>
       <p>
-        My name is Carlo. I work as the Lead&nbsp;Frontend Developer at <a
-          href="https://dallonses.com"
-          target="_blank"
-          class:list={[underline, "hover:no-underline"]}>Dallonses</a
-        >, where I lead boutique, creative projects like the <a
-          href="https://vasava.es"
-          target="_blank"
-          class:list={[underline, "hover:no-underline"]}>Vasava website</a
-        >, and&nbsp;complex, technical ones like <a
-          href="https://wikiparfum.com"
-          target="_blank"
-          class:list={[underline, "hover:no-underline"]}>Wikiparfum</a
-        >.
+        I'm Carlo. I work as the Frontend Tech&nbsp;Lead
+        at&nbsp;<a href="https://dallonses.com" target="_blank">Dallonses</a>,
+        building boutique, creative projects like
+        the&nbsp;<a href="https://vasava.es" target="_blank">Vasava website</a>,
+        and&nbsp;complex, technical ones like <a href="https://wikiparfum.com"target="_blank">Wikiparfum</a>.
       </p>
       <p>
-        Previously I worked at <a
-          href="https://notfound.es"
-          target="_blank"
-          class:list={[underline, "hover:no-underline"]}>Not Found</a
-        > building creative web experiences.
+        Previously, I was the Creative Technologist at <a href="https://notfound.es" target="_blank">Not Found</a>, where I focused on tailor-made web experiences.
       </p>
       <p>
-        I see myself as a designer at heart and enjoy crafting software with a
-        distinctive visual sensibility.
+        I see myself as a designer at heart and enjoy creating software with a distinctive visual sensibility.
       </p>
     </article>
-    <section>
-      <header>
-        <h2>Career</h2>
-      </header>
+    <Section header="Lately">
+      <p>
+        Crafting websites for
+        <a href="https://www.artiststogether.online" target="_blank">Artists&nbsp;Together</a>,
+        <a href="https://malastudio.xyz" target="_blank">Mala&nbsp;Studio</a>,
+        <a href="https://www.santobucle.com" target="_blank">Santo&nbsp;Bucle</a>,
+        and <a href="https://seriouslycool.website" target="_blank">Eriane</a>.
+      </p>
+      <p>
+        Learning about local&#8209;first software, micro&nbsp;apartments, the&nbsp;indie&nbsp;web, and&nbsp;Vim.
+      </p>
+      <p>
+        Listening to <a href="https://youtu.be/QJrI07bNfnc?si=PYeXrhDKtB2xFNmv" target="_blank">Dødheimsgard</a>
+        and <a href="https://youtu.be/pOKpdQeKuWQ?si=vzEWImGMwyCTyRyk" target="_blank">Cynthoni</a>.
+      </p>
+    </Section>
+    <Section header="Career">
       <ul>
         {
           places.map((place) => (
@@ -114,11 +146,9 @@ const underline = "decoration-gray-200 underline underline-offset-4"
                 <a
                   href={place.href}
                   target="_blank"
-                  class="group flex justify-between"
+                  class="group flex items-center"
                 >
-                  <h3 class:list={[underline, "group-hover:no-underline"]}>
-                    {place.name}
-                  </h3>
+                  <span class="flex-1">{place.name}</span>
                   <span>{place.year.join(" — ")}</span>
                 </a>
               </article>
@@ -126,11 +156,9 @@ const underline = "decoration-gray-200 underline underline-offset-4"
           ))
         }
       </ul>
-    </section>
-    <section>
-      <header>
-        <h2>Recognitions</h2>
-      </header>
+    </Section>
+    </body>
+    <Section header="Awards">
       <ul>
         {
           awards.map((award) => (
@@ -139,11 +167,9 @@ const underline = "decoration-gray-200 underline underline-offset-4"
                 <a
                   href={award.href}
                   target="_blank"
-                  class="group flex justify-between"
+                  class="group flex items-center"
                 >
-                  <h3 class:list={[underline, "group-hover:no-underline"]}>
-                    {award.name}
-                  </h3>
+                  <span class="flex-1">{award.name}</span>
                   <time>{award.year}</time>
                 </a>
               </article>
@@ -151,9 +177,23 @@ const underline = "decoration-gray-200 underline underline-offset-4"
           ))
         }
       </ul>
-    </section>
-    <footer class="grid place-items-end">
-      <Logo />
+    </Section>
+    <footer>
+      <Section header="Social">
+        <ul>
+          {social.map((social) => (
+            <li>
+                <a
+                    href={social.href}
+                    target="_blank"
+                    class="group flex items-center"
+                  >
+              {social.name}
+                  </a>
+              </li>
+          ))}
+        </ul>
+      </Section>
     </footer>
   </body>
 </html>
