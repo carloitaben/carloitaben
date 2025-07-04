@@ -1,5 +1,6 @@
 ---
-draft: true
+year: 2025
+slug: colocation
 title: Separation by Concerns
 ---
 
