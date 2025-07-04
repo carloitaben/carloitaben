@@ -3,37 +3,48 @@ draft: true
 title: How I'm using Vim
 ---
 
-- I use [`VSCodeVim`](https://github.com/VSCodeVim/Vim).
-- I want to keep my Vim setup quite vanilla, so I don't really do huge remaps.
+Vim is incredible. It's made coding a lot more fun for me.
 
-## Remmaping `HJKL`
+This post is a collection of tricks I rely on, plus some of my most-used remaps. Both to help me remember them and hopefully help someone else too.
 
-This is probably the biggest remap I have.
+## Better `HJKL`
 
-- I find <kbd>H<kbd> and <kbd>L<kbd> confusing since they are vertical movements and <kbd>h</kbd> and <kbd>l</kbd> are horizontal movements.
-- I also don't really like <kbd>J</kbd> and <kbd>K</kbd>. I never use them. So I placed <kbd>H</kbd> and <kbd>L</kbd> there.
-- I like tabs. I don't like <kbd>gT<kbd> and <kbd>gt<kbd>, tho.
-  - I want to move through my tabs fast, and those motions are a bit too slow for my taste when since they are done entirely with the left hand.
-  - I use <kbd>H</kbd> and <kbd><L/kbd> for that
+I try to keep my setup close to vanilla. I don't usually remap alphanumeric keys, but this is the one big exception.
+
+The <kbd>h</kbd> and <kbd>l</kbd> keys are horizontal movements, but <kbd>H</kbd> and <kbd>L</kbd> are mapped to vertical motion. That always felt backward to me. I don't really use <kbd>J</kbd> and <kbd>K</kbd>, so I swapped them out.
+
+This also frees up <kbd>H</kbd> and <kbd>L</kbd> to move between tabs. It's way faster than using <kbd>gt</kbd> and <kbd>gT</kbd>, which are awkwardly left-hand-heavy.
+
+```json
+{
+  "vim.normalModeKeyBindingsNonRecursive": [
+    { "before": ["J"], "after": ["L"] },
+    { "before": ["K"], "after": ["H"] },
+    { "before": ["H"], "after": ["g", "T"] },
+    { "before": ["L"], "after": ["g", "t"] }
+  ]
+}
+```
+
+## Problems
+
+I copied this from [Dax](https://github.com/thdxr), and I love it. (I love Dax, too.)
+
+- <kbd>Ctrl</kbd>+<kbd>j</kbd> → next problem
+- <kbd>Ctrl</kbd>+<kbd>k</kbd> → previous problem
+
+Makes it easy to fly through warnings and errors.
 
 ```json
 {
   "vim.normalModeKeyBindingsNonRecursive": [
     {
-      "before": ["J"],
-      "after": ["L"]
+      "before": ["<C-k>"],
+      "commands": ["editor.action.marker.prev"]
     },
     {
-      "before": ["K"],
-      "after": ["H"]
-    },
-    {
-      "before": ["H"],
-      "after": ["g", "T"]
-    },
-    {
-      "before": ["L"],
-      "after": ["g", "t"]
+      "before": ["<C-j>"],
+      "commands": ["editor.action.marker.next"]
     }
   ]
 }
@@ -41,8 +52,11 @@ This is probably the biggest remap I have.
 
 ## Splits
 
-- I do <kbd><kbd>Space</kbd>+<kbd>v</kbd></kbd> for a vertical split and <kbd><kbd>Space</kbd>+<kbd>s</kbd></kbd> for an horizontal one.
-- For moving between panes, I use<kbd><kbd>Space</kbd>+<kbd>hjkl</kbd></kbd>
+These are from [Melkey](https://github.com/Melkeydev). They're intuitive and easy to reach.
+
+- <kbd>Space</kbd> + <kbd>v</kbd> → vertical split
+- <kbd>Space</kbd> + <kbd>s</kbd> → horizontal split
+- <kbd>Space</kbd> + <kbd>hjkl</kbd> → move between panes
 
 ```json
 {
@@ -75,35 +89,9 @@ This is probably the biggest remap I have.
 }
 ```
 
-## Problems
-
-I copied the keybinds for navigating through problems from [Dax](https://github.com/thdxr).
-
-- <kbd><kbd>Ctrl</kbd>+<kbd>k</kbd></kbd> to go to the previous problem
-- <kbd><kbd>Ctrl</kbd>+<kbd>j</kbd></kbd> to go to the next problem
-
-It's crazy how fast you can fix warnings and errors this way.
-
-```json
-{
-  "vim.normalModeKeyBindingsNonRecursive": [
-    {
-      "before": ["<C-k>"],
-      "commands": ["editor.action.marker.prev"]
-    },
-    {
-      "before": ["<C-j>"],
-      "commands": ["editor.action.marker.next"]
-    }
-  ]
-}
-```
-
 ## Visual mode
 
-I have a couple of remaps for doing things in Visual Mode without exiting it.
-
-These ones for indenting:
+These bindings let me stay in Visual Mode to indent or move selections around.
 
 ```json
 {
@@ -115,16 +103,7 @@ These ones for indenting:
     {
       "before": [">"],
       "commands": ["editor.action.indentLines"]
-    }
-  ]
-}
-```
-
-And these ones for moving my selection:
-
-```json
-{
-  "vim.visualModeKeyBindings": [
+    },
     {
       "before": ["J"],
       "commands": ["editor.action.moveLinesDownAction"]
@@ -137,11 +116,29 @@ And these ones for moving my selection:
 }
 ```
 
-## Other
+This one lets me paste without overriding the yank register.
 
-- I use <kbd>go</kbd> instead of <kbd>gg</kbd> to go to the top of the file. It's more ergonomic.
-- I use <kbd>gh</kbd> instead of <kbd><kbd>⌘</kbd>+<kbd>k</kbd><kbd>⌘</kbd>+<kbd>i</kbd></kbd> to [g]o to the [h]elp tooltip.
-- I use <kbd>gd</kbd> to [g]o to [d]efinition
-- I use <kbd>gr</kbd> to [g]o to [r]eferences
-- I use <kbd><kbd>Space</kbd>+<kbd>f</kbd></kbd> to manually [f]ormat my code
-- I format my JSDoc paragraphs by selecting them and using <kbd>gq</kbd>.
+```json
+{
+  "vim.visualModeKeyBindingsNonRecursive": [
+    {
+      "before": ["p"],
+      "after": ["p", "g", "v", "y"]
+    }
+  ]
+}
+```
+
+## Other things I like
+
+- <kbd>go</kbd> → faster than <kbd>gg</kbd> to navigate to the top of the file
+- <kbd>gh</kbd> → faster than <kbd>⌘K ⌘I</kbd> to show the help tooltip
+- <kbd>gd</kbd> → go to definition
+- <kbd>gr</kbd> → go to references
+- <kbd>gq</kbd> → makes my JSDoc paragraphs consistent
+- <kbd>Space</kbd> + <kbd>f</kbd> → format code
+- <kbd>Ctrl</kbd> + <kbd>n</kbd> / <kbd>Ctrl</kbd> + <kbd>p</kbd> → better than arrow keys in lists
+
+---
+
+If you have a favorite Vim tweak, please let me know!
