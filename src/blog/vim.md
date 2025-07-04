@@ -1,6 +1,6 @@
 ---
 draft: true
-title: How I use Vim
+title: How I'm using Vim
 ---
 
 - I use [`VSCodeVim`](https://github.com/VSCodeVim/Vim).
