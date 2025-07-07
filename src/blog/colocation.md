@@ -9,7 +9,7 @@ Lately, I've noticed a shift in how I organize my code. My brain now follows two
 - Colocate code that changes often together.
 - Large files are okay.
 
-## From kind-based to concern-based
+---
 
 I used to split my code by type:
 
@@ -52,6 +52,8 @@ If I find shared code between `search.ts` an` `navigation.ts`, I extract it:
 ```diff
 src
 └── lib
+    ├── navigation.ts
+    ├── navigation.test.ts
     ├── search.ts
     ├── search.test.ts
 +   ├── utils.ts
