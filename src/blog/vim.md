@@ -16,6 +16,11 @@ The <kbd>h</kbd> and <kbd>l</kbd> keys are horizontal movements, but <kbd>H</kbd
 
 This also frees up <kbd>H</kbd> and <kbd>L</kbd> to move between tabs. It's way faster than using <kbd>gt</kbd> and <kbd>gT</kbd>, which are awkwardly left-hand-heavy.
 
+- <kbd>H</kbd> → previous tab
+- <kbd>J</kbd> → move to bottom of screen
+- <kbd>K</kbd> → move to top of screen
+- <kbd>L</kbd> → next tab
+
 ```json
 {
   "vim.normalModeKeyBindingsNonRecursive": [
