@@ -144,6 +144,7 @@ This one lets me paste without overriding the yank register.
 - <kbd>gq</kbd> → makes my JSDoc paragraphs consistent
 - <kbd>Space</kbd> + <kbd>f</kbd> → format code
 - <kbd>Ctrl</kbd> + <kbd>n</kbd> / <kbd>Ctrl</kbd> + <kbd>p</kbd> → better than arrow keys in lists
+- <kbd>Ctrl</kbd> + <kbd>o</kbd> / <kbd>Ctrl</kbd> + <kbd>i</kbd> → move through the jump list
 
 ---
 
