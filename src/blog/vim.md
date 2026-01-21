@@ -4,148 +4,112 @@ slug: vim
 title: How I'm using Vim
 ---
 
-Vim is incredible. It's made coding a lot more fun for me.
-
-This post is a collection of tricks I rely on, plus some of my most-used remaps. Both to help me remember them and hopefully help someone else too.
+I love Vim. This is my short list of keybinds and remaps I actually use and want to remember.
 
 ## Better `HJKL`
 
-I try to keep my setup close to vanilla. I don't usually remap alphanumeric keys, but this is the one big exception.
+I keep things close to vanilla, but this is my big exception.
 
-The <kbd>h</kbd> and <kbd>l</kbd> keys are horizontal movements, but <kbd>H</kbd> and <kbd>L</kbd> are mapped to vertical motion. That always felt backward to me. I don't really use <kbd>J</kbd> and <kbd>K</kbd>, so I swapped them out.
+`h` and `l` move horizontally, yet `H` and `L` are mapped to vertical motion. That felt backward. I don't use `J` and `K`, so I swapped them and repurposed `H` and `L` for tabs. Faster than `gt`/`gT` and less left‑hand contortion.
 
-This also frees up <kbd>H</kbd> and <kbd>L</kbd> to move between tabs. It's way faster than using <kbd>gt</kbd> and <kbd>gT</kbd>, which are awkwardly left-hand-heavy.
-
-- <kbd>H</kbd> → previous tab
+- <kbd>H</kbd> → go to previous tab
 - <kbd>J</kbd> → move to bottom of screen
 - <kbd>K</kbd> → move to top of screen
-- <kbd>L</kbd> → next tab
+- <kbd>L</kbd> → go to next tab
 
-```json
-{
-  "vim.normalModeKeyBindingsNonRecursive": [
-    { "before": ["J"], "after": ["L"] },
-    { "before": ["K"], "after": ["H"] },
-    { "before": ["H"], "after": ["g", "T"] },
-    { "before": ["L"], "after": ["g", "t"] }
-  ]
-}
-```
+## Diagnostics
 
-## Problems
+I use these when I know there's a warning or error.
 
-I copied this from [Dax](https://github.com/thdxr), and I love it. (I love Dax, too.)
+- <kbd>]d</kbd> → go to next [d]iagnostic
+- <kbd>[d</kbd> → go to previous [d]iagnostic
 
-- <kbd>Ctrl</kbd>+<kbd>j</kbd> → next problem
-- <kbd>Ctrl</kbd>+<kbd>k</kbd> → previous problem
+## Git
 
-Makes it easy to fly through warnings and errors.
+For quick edits, [Zed's built‑in git motions](https://zed.dev/docs/vim#git) are great.
 
-```json
-{
-  "vim.normalModeKeyBindingsNonRecursive": [
-    {
-      "before": ["<C-k>"],
-      "commands": ["editor.action.marker.prev"]
-    },
-    {
-      "before": ["<C-j>"],
-      "commands": ["editor.action.marker.next"]
-    }
-  ]
-}
-```
+- <kbd>]c</kbd> → go to next git [c]hange
+- <kbd>[c</kbd> → go to previous git [c]hange
+- <kbd>do</kbd> → expand diff hunk ([d]iff [o]pen)
+- <kbd>dO</kbd> → toggle staged
+- <kbd>dp</kbd> → restore change ([d]iff [p]revious)
 
-## Splits
+## Tasks
 
-These are from [Melkey](https://github.com/Melkeydev). They're intuitive and easy to reach.
+I keep two [Zed tasks](https://zed.dev/docs/tasks) bound.
 
-- <kbd>Space</kbd> + <kbd>v</kbd> → vertical split
-- <kbd>Space</kbd> + <kbd>s</kbd> → horizontal split
-- <kbd>Space</kbd> + <kbd>hjkl</kbd> → move between panes
+- <kbd>⌘+?</kbd> → spawn [`opencode`](https://opencode.ai/)
+- <kbd>⌘+g</kbd> → spawn [`lazygit`](https://github.com/jesseduffield/lazygit)
 
-```json
-{
-  "vim.normalModeKeyBindingsNonRecursive": [
-    {
-      "before": ["leader", "v"],
-      "commands": [":vsplit"]
-    },
-    {
-      "before": ["leader", "s"],
-      "commands": [":split"]
-    },
-    {
-      "before": ["leader", "h"],
-      "commands": ["workbench.action.focusLeftGroup"]
-    },
-    {
-      "before": ["leader", "j"],
-      "commands": ["workbench.action.focusBelowGroup"]
-    },
-    {
-      "before": ["leader", "k"],
-      "commands": ["workbench.action.focusAboveGroup"]
-    },
-    {
-      "before": ["leader", "l"],
-      "commands": ["workbench.action.focusRightGroup"]
-    }
-  ]
-}
-```
+## Panes
+
+I use native Vim window commands for docks and panes, and mirror a subset in the terminal dock.
+
+- <kbd>ctrl-wh</kbd> → move cursor to the left window
+- <kbd>ctrl-wj</kbd> → move cursor to the window below
+- <kbd>ctrl-wk</kbd> → move cursor to the window above
+- <kbd>ctrl-wl</kbd> → move cursor to the right window
+- <kbd>ctrl-wq</kbd> → [q]uit window
+- <kbd>ctrl-ws</kbd> → [s]plit window
+- <kbd>ctrl-wv</kbd> → split window [v]ertically
 
 ## Visual mode
 
-These bindings let me stay in Visual Mode to indent or move selections around.
+I like staying in Visual Mode while indenting or moving selections.
 
-```json
-{
-  "vim.visualModeKeyBindings": [
-    {
-      "before": ["<"],
-      "commands": ["editor.action.outdentLines"]
-    },
-    {
-      "before": [">"],
-      "commands": ["editor.action.indentLines"]
-    },
-    {
-      "before": ["J"],
-      "commands": ["editor.action.moveLinesDownAction"]
-    },
-    {
-      "before": ["K"],
-      "commands": ["editor.action.moveLinesUpAction"]
-    }
-  ]
-}
-```
+- <kbd>></kbd> → indent selection
+- <kbd><</kbd> → outdent selection
+- <kbd>=</kbd> → autoindent selection
+- <kbd>J</kbd> → move selection down
+- <kbd>K</kbd> → move selection up
 
-This one lets me paste without overriding the yank register.
+I used to remap <kbd>p</kbd> before learning there's already [<kbd>P</kbd>](https://neovim.io/doc/user/change.html#v_P):
 
-```json
-{
-  "vim.visualModeKeyBindingsNonRecursive": [
-    {
-      "before": ["p"],
-      "after": ["p", "g", "v", "y"]
-    }
-  ]
-}
-```
+- <kbd>p</kbd> → [p]aste
+- <kbd>P</kbd> → [p]aste without overriding clipboard
+
+## Multicursors
+
+Built‑in Zed multicursor bindings. Still experimenting, but I like how they keep me in the home row.
+
+- <kbd>ga</kbd> → select [a]ll occurrences of the current selection
+- <kbd>gl</kbd> → select the next occurrence of the current selection
+- <kbd>gL</kbd> → select the previous occurrence of the current selection
+- <kbd>g></kbd> → replace the latest selection with the next occurrence
+- <kbd>g<</kbd> → replace the latest selection with the previous occurrence
+
+They work with counts, so I can do <kbd>3gl</kbd>.
 
 ## Other things I like
 
+These are the small daily drivers, grouped by category.
+
+Navigation:
+
+- <kbd>ctrl-o</kbd> → navigates back in history
+- <kbd>ctrl-i</kbd> → navigates forward in history
+- <kbd>g,</kbd> → navigates to an older position in the change list
+- <kbd>g;</kbd> → navigates to an newer position in the change list
 - <kbd>go</kbd> → faster than <kbd>gg</kbd> to navigate to the top of the file
 - <kbd>gh</kbd> → faster than <kbd>⌘K ⌘I</kbd> to show the help tooltip
+
+LSP:
+
 - <kbd>gd</kbd> → go to definition
 - <kbd>gr</kbd> → go to references
+
+Code actions:
+
+- <kbd>Space</kbd> + <kbd>f</kbd> → [f]ormat code
+
+When reading documentation:
+
+- <kbd>gx</kbd> → open URL
+
+When writing documentation:
+
 - <kbd>gq</kbd> → makes my JSDoc paragraphs consistent
-- <kbd>Space</kbd> + <kbd>f</kbd> → format code
-- <kbd>Ctrl</kbd> + <kbd>n</kbd> / <kbd>Ctrl</kbd> + <kbd>p</kbd> → better than arrow keys in lists
-- <kbd>Ctrl</kbd> + <kbd>o</kbd> / <kbd>Ctrl</kbd> + <kbd>i</kbd> → move through the jump list
 
 ---
 
-If you have a favorite Vim tweak, please let me know!
+That's the whole setup: mostly vanilla, with a few fast tweaks. If you have a favorite Vim tweak, let me know.
