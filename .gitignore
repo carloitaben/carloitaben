@@ -19,3 +19,6 @@ pnpm-debug.log*
 
 # sst
 .sst
+
+# opencode
+.opencode/plans
