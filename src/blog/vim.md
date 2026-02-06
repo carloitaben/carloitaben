@@ -1,6 +1,5 @@
 ---
 year: evergreen
-slug: vim
 title: How I'm using Vim
 ---
 
