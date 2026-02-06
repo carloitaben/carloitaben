@@ -12,23 +12,41 @@
   }
 
   html {
-    @apply font-mono bg-white text-gray-700 selection:bg-gray-200;
+    @apply h-full bg-white font-mono text-gray-700 selection:bg-gray-200;
   }
 
   body {
-    @apply text-sm;
+    @apply min-h-full max-w-[61ch] space-y-2lh px-4 py-8 text-sm md:max-w-[67ch] md:p-10;
   }
 
+  main {
+    @apply space-y-lh;
+  }
+
+  h1,
+  h2,
   h3 {
-    @apply before:content-['––––––'] before:block uppercase;
+    @apply uppercase before:block before:content-['––––––'];
   }
 
   a {
-    @apply underline decoration-gray-200 underline-offset-4 hover:no-underline group-hover:no-underline;
+    @apply underline decoration-gray-200 underline-offset-4 hover:no-underline;
   }
 
   section {
     @apply space-y-lh;
+  }
+
+  section ul {
+    @apply pe-[1ch];
+  }
+
+  section ul a {
+    @apply flex items-center;
+  }
+
+  section ul a span:first-child {
+    @apply flex-1;
   }
 
   small {

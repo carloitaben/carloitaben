@@ -1,6 +1,26 @@
 ---
-import "~/styles/index.css"
-import Section from "~/components/Section.astro"
+import "@/styles/index.css"
+import Html from "@/components/Html.astro"
+import Section from "@/components/Section.astro"
+import { getCollection } from "astro:content"
+
+const posts = await getCollection("drafts").then((posts) =>
+  posts.sort((a, b) => {
+    const aYear = a.data.year
+    const bYear = b.data.year
+    const aEvergreen = aYear === "evergreen"
+    const bEvergreen = bYear === "evergreen"
+
+    if (aEvergreen && !bEvergreen) return -1
+    if (!aEvergreen && bEvergreen) return 1
+
+    if (!aEvergreen && !bEvergreen && aYear !== bYear) {
+      return bYear - aYear
+    }
+
+    return a.data.title.localeCompare(b.data.title)
+  }),
+)
 
 const places = [
   {
@@ -68,72 +88,85 @@ const social = [
 const email = new URL("mailto:hello@carlo.works")
 
 email.searchParams.set("subject", "Dearest and Most Esteemed Carlo")
-email.searchParams.set("body",
+email.searchParams.set(
+  "body",
   `In the grand tapestry of our shared existence, woven with the finest ` +
-  `threads of camaraderie and mutual respect, I find myself compelled ` +
-  `to extend to you an epistolary missive. It is with the utmost reverence ` +
-  `and profound admiration for your unparalleled intellect and unwavering ` +
-  `spirit that I pen these words, hoping to illuminate the corridors ` +
-  `of your esteemed thoughts with the brilliance of my humble reflections.\n\n` +
-  `In this ever-evolving landscape of our lives, the importance of forging ` +
-  `and nurturing connections cannot be overstated. It is through dialogue ` +
-  `and shared experiences that we cultivate understanding and foster ` +
-  `the bonds that unite us. Thus, I am eager to engage in a meaningful ` +
-  `conversation with you, to explore the realms of our thoughts and ideas, ` +
-  `and to delve into the myriad topics that spark our curiosity.\n\n` +
-  `I believe that our exchanges can serve as a beacon of inspiration, ` +
-  `illuminating the paths we traverse and enriching our perspectives. ` +
-  `It is my sincerest hope that we may soon find the opportunity to connect, ` +
-  `to share our insights, and to revel in the joy of intellectual discourse.\n\n` +
-  `Yours sincerely,\n` +
-  `[YOUR NAME GOES HERE]`
+    `threads of camaraderie and mutual respect, I find myself compelled ` +
+    `to extend to you an epistolary missive. It is with the utmost reverence ` +
+    `and profound admiration for your unparalleled intellect and unwavering ` +
+    `spirit that I pen these words, hoping to illuminate the corridors ` +
+    `of your esteemed thoughts with the brilliance of my humble reflections.\n\n` +
+    `In this ever-evolving landscape of our lives, the importance of forging ` +
+    `and nurturing connections cannot be overstated. It is through dialogue ` +
+    `and shared experiences that we cultivate understanding and foster ` +
+    `the bonds that unite us. Thus, I am eager to engage in a meaningful ` +
+    `conversation with you, to explore the realms of our thoughts and ideas, ` +
+    `and to delve into the myriad topics that spark our curiosity.\n\n` +
+    `I believe that our exchanges can serve as a beacon of inspiration, ` +
+    `illuminating the paths we traverse and enriching our perspectives. ` +
+    `It is my sincerest hope that we may soon find the opportunity to connect, ` +
+    `to share our insights, and to revel in the joy of intellectual discourse.\n\n` +
+    `Yours sincerely,\n` +
+    `[YOUR NAME GOES HERE]`,
 )
 
-email.search = email.search.replace(/\+/g, '%20')
+email.search = email.search.replace(/\+/g, "%20")
 ---
 
-<html lang="en" class="h-full ">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
-    <title>Carlo Domínguez</title>
-  </head>
-  <body class="min-h-full max-w-[61ch]  md:max-w-[67ch] px-4 py-8 md:p-10 space-y-2lh">
-    <article class="space-y-lh">
-      <header>
-        <a href={email.href}>
-          <h1>CARLO(DOT)WORKS</h1>
-        </a>
-      </header>
-      <p>
-        I'm Carlo. I work as the Frontend Tech&nbsp;Lead
-        at&nbsp;<a href="https://dallonses.com" target="_blank">Dallonses</a>,
-        building boutique, creative projects like
-        the&nbsp;<a href="https://vasava.es" target="_blank">Vasava website</a>,
-        and&nbsp;complex, technical ones like <a href="https://wikiparfum.com"target="_blank">Wikiparfum</a>.
-      </p>
-      <p>
-        Previously, I was the Creative Technologist at <a href="https://notfound.es" target="_blank">Not Found</a>, where I focused on tailor-made web experiences.
-      </p>
-      <p>
-        I see myself as a designer at heart and enjoy creating software with a distinctive visual sensibility.
-      </p>
-    </article>
+<Html>
+  <title slot="head">Carlo Domínguez</title>
+  <main>
+    <header>
+      <a href={email.href}>
+        <h1>CARLO(DOT)WORKS</h1>
+      </a>
+    </header>
+    <p>
+      I'm Carlo. I work as the Frontend Tech&nbsp;Lead at&nbsp;<a
+        href="https://dallonses.com"
+        target="_blank">Dallonses</a
+      >, building boutique, creative projects like the&nbsp;<a
+        href="https://vasava.es"
+        target="_blank">Vasava website</a
+      >, and&nbsp;complex, technical ones like <a
+        href="https://wikiparfum.com"
+        target="_blank">Wikiparfum</a
+      >.
+    </p>
+    <p>
+      Previously, I was the Creative Technologist at <a
+        href="https://notfound.es"
+        target="_blank">Not Found</a
+      >, where I focused on tailor-made web experiences.
+    </p>
+    <p>
+      I see myself as a designer at heart and enjoy creating software with a
+      distinctive visual sensibility.
+    </p>
     <Section header="Lately">
       <p>
         Crafting websites for
-        <a href="https://www.artiststogether.online" target="_blank">Artists&nbsp;Together</a>,
+        <a href="https://www.artiststogether.online" target="_blank"
+          >Artists&nbsp;Together</a
+        >,
         <a href="https://malastudio.xyz" target="_blank">Mala&nbsp;Studio</a>,
-        <a href="https://www.santobucle.com" target="_blank">Santo&nbsp;Bucle</a>,
-        and <a href="https://seriouslycool.website" target="_blank">Eriane</a>.
+        <a href="https://www.santobucle.com" target="_blank">Santo&nbsp;Bucle</a
+        >, and <a href="https://seriouslycool.website" target="_blank">Eriane</a
+        >.
       </p>
       <p>
-        Learning about local&#8209;first software, micro&nbsp;apartments, the&nbsp;indie&nbsp;web, and&nbsp;Vim.
+        Learning about local&#8209;first software, micro&nbsp;apartments,
+        the&nbsp;indie&nbsp;web, and&nbsp;Vim.
       </p>
       <p>
-        Listening to <a href="https://youtu.be/QJrI07bNfnc?si=PYeXrhDKtB2xFNmv" target="_blank">Dødheimsgard</a>
-        and <a href="https://youtu.be/pOKpdQeKuWQ?si=vzEWImGMwyCTyRyk" target="_blank">Cynthoni</a>.
+        Listening to <a
+          href="https://youtu.be/QJrI07bNfnc?si=PYeXrhDKtB2xFNmv"
+          target="_blank">Dødheimsgard</a
+        >
+        and <a
+          href="https://youtu.be/pOKpdQeKuWQ?si=vzEWImGMwyCTyRyk"
+          target="_blank">Cynthoni</a
+        >.
       </p>
     </Section>
     <Section header="Career">
@@ -141,58 +174,61 @@ email.search = email.search.replace(/\+/g, '%20')
         {
           places.map((place) => (
             <li>
-              <article>
-                <a
-                  href={place.href}
-                  target="_blank"
-                  class="group flex items-center"
-                >
-                  <span class="flex-1">{place.name}</span>
-                  <span>{place.year.join(" — ")}</span>
-                </a>
-              </article>
+              <a href={place.href} target="_blank">
+                <span>{place.name}</span>
+                <span>{place.year.join(" — ")}</span>
+              </a>
             </li>
           ))
         }
       </ul>
     </Section>
-    </body>
     <Section header="Awards">
       <ul>
         {
           awards.map((award) => (
             <li>
-              <article>
-                <a
-                  href={award.href}
-                  target="_blank"
-                  class="group flex items-center"
-                >
-                  <span class="flex-1">{award.name}</span>
-                  <time>{award.year}</time>
-                </a>
-              </article>
+              <a href={award.href} target="_blank">
+                <span>{award.name}</span>
+                <time>{award.year}</time>
+              </a>
             </li>
           ))
         }
       </ul>
     </Section>
-    <footer>
-      <Section header="Social">
-        <ul>
-          {social.map((social) => (
+    <Section header="Drafts">
+      <ul>
+        {
+          posts.map((post) => (
             <li>
-                <a
-                    href={social.href}
-                    target="_blank"
-                    class="group flex items-center"
-                  >
-              {social.name}
-                  </a>
-              </li>
-          ))}
-        </ul>
-      </Section>
-    </footer>
-  </body>
-</html>
+              <a href={`/drafts/${post.id}`} target="_blank">
+                <span>{post.data.title}</span>
+                {typeof post.data.year === "string" ? (
+                  <span>{post.data.year}</span>
+                ) : (
+                  <time>{post.data.year}</time>
+                )}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </Section>
+  </main>
+  <footer>
+    <Section header="Social">
+      <ul>
+        {
+          social.map((social) => (
+            <li>
+              <a href={social.href} target="_blank">
+                {social.name}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </Section>
+  </footer>
+</Html>
