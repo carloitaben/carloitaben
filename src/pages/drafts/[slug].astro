@@ -1,0 +1,30 @@
+---
+import { getCollection } from "astro:content"
+import { render } from "astro:content"
+import { getEntry } from "astro:content"
+
+export async function getStaticPaths() {
+  const drafts = await getCollection("drafts")
+  return drafts.map((draft) => ({
+    params: {
+      slug: draft.id,
+    },
+  }))
+}
+
+const { slug } = Astro.params
+
+if (!slug) {
+  throw new Error("Missing slug param")
+}
+
+const draft = await getEntry("drafts", slug)
+
+if (!draft) {
+  throw new Error(`Unable to find draft with slug "${slug}"`)
+}
+
+const { Content, headings } = await render(draft)
+---
+
+<Content />
